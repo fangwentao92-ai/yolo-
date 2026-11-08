@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: yolo-gui
+    runtime: python
+    region: singapore
+    # torch 必须从 CPU 源安装，否则会拉 2.5GB 的 CUDA 包导致构建超时
+    buildCommand: "pip install --upgrade pip && pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu && pip install -r requirements.txt"
+    startCommand: python webapp.py
+    # 根路径返回 200 即视为健康，避免部署切换时误判
+    healthCheckPath: /
+    envVars:
+      - key: MAX_VIDEO_FRAMES
+        value: "150"
+      - key: MAX_WIDTH
+        value: "960"
