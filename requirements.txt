@@ -1,0 +1,7 @@
+# 部署用依赖：torch 不写在这里，构建时用 CPU 源单独安装
+# （见 README 的 Render 构建命令），否则会下载 2.5GB 的 CUDA 包。
+ultralytics>=8.4.0,<8.5
+gradio>=5.0,<6.0
+imageio-ffmpeg>=0.5
+# 放在最后，覆盖 ultralytics 带进来的 opencv-python，服务器没有 GUI 库
+opencv-python-headless>=4.10
